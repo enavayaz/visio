@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from utils import normalize, reshape
+from .utils import normalize, reshape
 from tensorflow.keras.datasets import mnist
 
 def load_csv(train_path, test_path):
@@ -18,4 +18,5 @@ def load_mnist_dataset():
     return X_train, y_train, X_test, y_test
 
 def split(X, y, test_size=0.1, random_state=42):
+
     return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
