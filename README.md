@@ -29,16 +29,24 @@ make_submission(predictions)
 ## Project Structure
 
 ```
-visio/
-├── visio/
+visio/                          
+├── visio/                  
+│   ├── __init__.py         
 │   ├── models/
-│   │   └── cnn.py          ← ImNet class
-│   ├── utils.py            ← normalize, reshape, evaluate, make_submission
-│   └── data_loader.py      ← load_csv, load_keras_dataset, split
+│   │   ├── __init__.py     
+│   │   └── cnn.py          
+│   ├── utils.py            
+│   └── data_loader.py      
 ├── notebooks/
-│   └── run_imnet.ipynb     ← example usage on MNIST
+│   └── run_imnet.ipynb     
+├── tests/                  
+│   ├── test_cnn.py
+│   └── test_utils.py
 ├── pyproject.toml
-└── requirements.txt
+├── requirements.txt
+├── README.md               
+├── LICENSE                 
+└── .gitignore              
 ```
 
 ## Expected Accuracy on MNIST
