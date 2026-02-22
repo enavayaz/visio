@@ -43,7 +43,7 @@ def make_submission(predictions, output_path="submission.csv"):
     print(f"Saved to {output_path}")
     return submission
 
-def evaluate(model, X_val, y_val):
+def evaluate(model, X_val, y_val, conf_matrix=True):
     """Compute accuracy, confusion matrix and classification report on val set."""
 
     y_pred = model.predict(X_val)
@@ -53,22 +53,22 @@ def evaluate(model, X_val, y_val):
 
     print("Classification Report:")
     print(classification_report(y_val, y_pred, target_names=[str(i) for i in range(10)]))
-
-    cm = confusion_matrix(y_val, y_pred)
-    plt.figure(figsize=(10, 8))
-    plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title('Confusion Matrix')
-    plt.colorbar()
-    plt.xticks(range(10))
-    plt.yticks(range(10))
-    plt.xlabel('Predicted Label')
-    plt.ylabel('True Label')
-    for i in range(10):
-        for j in range(10):
-            plt.text(j, i, cm[i, j], ha='center', va='center',
-                     color='white' if cm[i, j] > cm.max() / 2 else 'black')
-    plt.tight_layout()
-    plt.show()
-
+    if conf_matrix:
+        cm = confusion_matrix(y_val, y_pred)
+        plt.figure(figsize=(10, 8))
+        plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+        plt.title('Confusion Matrix')
+        plt.colorbar()
+        plt.xticks(range(10))
+        plt.yticks(range(10))
+        plt.xlabel('Predicted Label')
+        plt.ylabel('True Label')
+        for i in range(10):
+            for j in range(10):
+                plt.text(j, i, cm[i, j], ha='center', va='center',
+                         color='white' if cm[i, j] > cm.max() / 2 else 'black')
+        plt.tight_layout()
+        plt.show()
 
     return acc
+
