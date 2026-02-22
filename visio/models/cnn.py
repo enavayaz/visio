@@ -143,23 +143,22 @@ class ImNet:
         """
         return np.argmax(self.model.predict(X_test), axis=1)
 
-
-	def save(self, path="visio_model.keras") -> None:
-	    """
-	    Save the trained model to disk.
-	
-	    Args:
-	        path: File path to save the model. Default: 'visio_model.keras'.
-	    """
-	    self.model.save(path)
-	    print(f"Model saved to {path}")
-	
-	def load(self, path="visio_model.keras") -> None:
-	    """
-	    Load a previously saved model from disk.
-	
-	    Args:
-	        path: File path of the saved model.
-	    """
-	    self.model = tf.keras.models.load_model(path)
-	    print(f"Model loaded from {path}")
+    def save(self, path="visio_model.keras") -> None:
+        """
+        Save the trained model to disk.
+    
+        Args:
+            path: File path to save the model. Default: 'visio_model.keras'.
+        """
+        self.model.save(path)
+        print(f"Model saved to {path}")
+    
+    def load(self, path="visio_model.keras") -> None:
+        """
+        Load a previously saved model from disk.
+    
+        Args:
+            path: File path of the saved model.
+        """
+        self.model = tf.keras.models.load_model(path)
+        print(f"Model loaded from {path}")
