@@ -3,10 +3,35 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 
-def normalize(X):
-    return X / 255.0
+def normalize(X, max_val=255.0):
+    """
+    Normalize array values to [0, 1].
 
-def reshape(X, shape=(-1, 28, 28, 1)):
+    Args:
+        X      : Input array.
+        max_val: Maximum pixel value to divide by. Default: 255.0.
+
+    Returns:
+        Normalized array.
+    """
+    return X / max_val
+
+
+def reshape(X, shape=None):
+    """
+    Reshape array to target shape.
+
+    Args:
+        X    : Input array.
+        shape: Target shape. If None, infers (N, H, W, 1) from X automatically.
+
+    Returns:
+        Reshaped array.
+    """
+    if shape is None:
+        n = X.shape[0]
+        hw = int(X.shape[1] ** 0.5)   # infers H and W from flat input
+        shape = (n, hw, hw, 1)
     return X.reshape(shape)
 
 def make_submission(predictions, output_path="submission.csv"):
@@ -44,5 +69,6 @@ def evaluate(model, X_val, y_val):
                      color='white' if cm[i, j] > cm.max() / 2 else 'black')
     plt.tight_layout()
     plt.show()
+
 
     return acc
