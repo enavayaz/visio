@@ -13,8 +13,8 @@ def load_csv(train_path, test_path):
 
 def load_mnist_dataset():
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
-    X_train = reshape(normalize(X_train))
-    X_test  = reshape(normalize(X_test))
+    X_train = reshape(X_train)
+    X_test  = reshape(X_test)
     return X_train, y_train, X_test, y_test
 
 def split(X, y, test_size=0.1, random_state=42):
