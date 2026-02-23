@@ -17,31 +17,45 @@ def normalize(X, max_val=255.0):
     return X / max_val
 
 
-def reshape(X, shape=None):
+def reshape(data, target_shape=None):
     """
-    Reshape array to target shape.
-
-    Args:
-        X    : Input array.
-        shape: Target shape. If None, infers (N, H, W, 1) from X automatically.
-
-    Returns:
-        Reshaped array.
+    Reshapes data for ML models.
+    If target_shape is None, it tries to add a trailing channel dimension.
     """
-    if shape is None:
-        n = X.shape[0]
-        hw = int(X.shape[1] ** 0.5)   # infers H and W from flat input
-        shape = (n, hw, hw, 1)
-    return X.reshape(shape)
+    if data is None:
+        return None
+
+    data = np.asarray(data)
+
+    # CASE 1: User provided a specific shape (e.g., (28, 28, 1) or (784,))
+    if target_shape is not None:
+        new_shape = (data.shape[0], *target_shape)
+        return data.reshape(new_shape)
+
+    # CASE 2: No shape provided - Default to adding a channel dim if it's a 2D image
+    # (N, H, W) -> (N, H, W, 1)
+    if len(data.shape) == 3:
+        return np.expand_dims(data, axis=-1)
+
+    return data
 
 def make_submission(predictions, output_path="submission.csv"):
+    # Ensure predictions are a 1D array of integers
+    if hasattr(predictions, "flatten"):
+        predictions = predictions.flatten()
+
     submission = pd.DataFrame({
         "ImageId": np.arange(1, len(predictions) + 1),
-        "Label": predictions
+        "Label": predictions.astype(int)  # Forces clean integer labels
     })
+
+    print("--- Submission Preview ---")
+    print(submission.head(10))
+    print(f"Shape: {submission.shape}")
+
     submission.to_csv(output_path, index=False)
-    print(f"Saved to {output_path}")
-    return submission
+    print(f"File saved successfully: {output_path}")
+    return submission  # Returning the df can be useful for further checks
 
 def evaluate(model, X_val, y_val, conf_matrix=True):
     """Compute accuracy, confusion matrix and classification report on val set."""
