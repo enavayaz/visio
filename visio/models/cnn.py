@@ -143,7 +143,7 @@ class ImNet:
         """
         return np.argmax(self.model.predict(X_test), axis=1)
 
-    def save(self, path="visio_model.keras") -> None:
+    def save(self, path="imnet_model.keras") -> None:
         """
         Save the trained model to disk.
     
@@ -153,7 +153,7 @@ class ImNet:
         self.model.save(path)
         print(f"Model saved to {path}")
     
-    def load(self, path="visio_model.keras") -> None:
+    def load(self, path="imnet_model.keras") -> None:
         """
         Load a previously saved model from disk.
     

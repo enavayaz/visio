@@ -12,8 +12,8 @@ pip install -r requirements.txt
 
 ```python
 from visio import ImNet
-from visio.data_loader import load_mnist_dataset, split
-from visio.utils import make_submission
+from visio import load_mnist_dataset, split
+from visio import make_submission
 
 X_train_full, y_train_full, X_test, y_test = load_mnist_dataset()
 X_train, X_val, y_train, y_val = split(X_train_full, y_train_full)
@@ -35,10 +35,14 @@ visio/
 │   ├── models/
 │   │   ├── __init__.py
 │   │   └── cnn.py
-│   ├── utils.py
-│   └── data_loader.py
+│   ├── data_loader.py
+│   └── utils.py
 ├── notebooks/
 │   └── run_imnet.ipynb
+├── saved_models/
+│   └── imnet_model.keras
+├── submissions/
+│   └── submission.csv
 ├── tests/
 │   ├── test_cnn.py
 │   └── test_utils.py
