@@ -123,7 +123,7 @@ class ImNet:
         self.history = self.model.fit(
             self.datagen.flow(X_train, y_train, batch_size=self.batch_size),
             epochs=self.epochs,
-            steps_per_epoch=len(X_train) // self.batch_size,
+            # steps_per_epoch removed — Keras infers it correctly from the generator
             validation_data=(X_val, y_val),
             callbacks=callbacks,
         )
