@@ -2,28 +2,14 @@
 
 A general-purpose image classification library built on TensorFlow/Keras.
 
+## Run on Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/enavayaz/visio/blob/main/notebooks/run_imnet.ipynb)
+
 ## Installation
 
 ```bash
 pip install -r requirements.txt
-```
-
-## Quick Start
-
-```python
-from visio import ImNet
-from visio import load_mnist_dataset, split
-from visio import make_submission
-
-X_train_full, y_train_full, X_test, y_test = load_mnist_dataset()
-X_train, X_val, y_train, y_val = split(X_train_full, y_train_full)
-
-model = ImNet(input_shape=(28, 28, 1), num_classes=10)
-model.compile()
-model.fit(X_train, y_train, X_val, y_val)
-
-predictions = model.predict(X_test)
-make_submission(predictions)
 ```
 
 ## Project Structure
@@ -31,21 +17,12 @@ make_submission(predictions)
 ```
 visio/
 ├── visio/
-│   ├── __init__.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── cnn.py
-│   ├── data_loader.py
-│   └── utils.py
+│── models/
+├── utils/
 ├── notebooks/
-│   └── run_imnet.ipynb
 ├── saved_models/
-│   └── imnet_model.keras
 ├── submissions/
-│   └── submission.csv
 ├── tests/
-│   ├── test_cnn.py
-│   └── test_utils.py
 ├── pyproject.toml
 ├── requirements.txt
 ├── README.md
