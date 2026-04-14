@@ -17,8 +17,8 @@ pip install -r requirements.txt
 ```
 visio/
 ├── visio/
-│── models/
-├── utils/
+│   └──── models/      
+│   └──── utils/
 ├── notebooks/
 ├── saved_models/
 ├── submissions/
